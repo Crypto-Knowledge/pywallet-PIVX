@@ -1231,7 +1231,7 @@ def SecretToASecret(secret, compressed=False):
 	if addrtype==(48):
         	prefix = chr(128)
     	elif addrtype==(30):
-        	prefix = '\xd4'
+        	prefix = chr(212)
 	vchIn = prefix + secret
 	if compressed: vchIn += '\01'
 	return EncodeBase58Check(vchIn)
