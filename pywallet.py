@@ -72,7 +72,7 @@ import os.path
 import platform
 
 max_version = 81000
-addrtype = 30
+addrtype = 0
 json_db = {}
 private_keys = []
 private_hex_keys = []
@@ -87,7 +87,7 @@ aversions[0] = 'Bitcoin';
 aversions[48] = 'Litecoin';
 aversions[52] = 'Namecoin';
 aversions[111] = 'Testnet';
-aversions[84] = 'PIVX';
+aversions[30] = 'PIVX';
 
 wallet_dir = ""
 wallet_name = ""
@@ -1228,6 +1228,10 @@ def PrivKeyToSecret(privkey):
 
 def SecretToASecret(secret, compressed=False):
 	prefix = chr((addrtype+128)&255)
+	if addrtype==(48):
+        	prefix = chr(128)
+    	elif addrtype==(30):
+        	prefix = chr(212)
 	vchIn = prefix + secret
 	if compressed: vchIn += '\01'
 	return EncodeBase58Check(vchIn)
